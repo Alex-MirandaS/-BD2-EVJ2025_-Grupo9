@@ -25,6 +25,14 @@
       </div>
     </section>
 
+    <section *ngIf="mostrarInput" class="search-container">
+      <label for="graficaSelect">Ingrese el Correlativo del Aspirante</label>
+      <form (ngSubmit)="buscar()">
+        <input type="text" [(ngModel)]="correlativo_aspirante" name="id" placeholder="Correlativo del Aspirante">
+        <button type="submit">Buscar</button>
+      </form>
+    </section>
+
     <section *ngIf="mostrarTabla" class="table-container">
       <div class="table-responsive">
         <table class="styled-table">
@@ -35,20 +43,27 @@
           </thead>
           <tbody>
             <tr *ngFor="let row of tabla">
-              <td *ngFor="let col of columnas">{{ row[col] }}</td>
+              <td *ngFor="let col of columnas">
+                <ng-container *ngIf="col === 'results'; else normalCell">
+                  <ul>
+                    <li *ngFor="let r of row[col]">
+                      Fecha: {{ r.date | date:'yyyy-MM-dd' }} -
+                      Evaluación: {{ r.eval_number }} -
+                      Resultado: {{ r.passed ? 'Aprobado' : 'Reprobado' }}
+                    </li>
+                  </ul>
+                </ng-container>
+                <ng-template #normalCell>
+                  {{ row[col] }}
+                </ng-template>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
 
-  <section class="console-section" *ngIf="backendData">
-    <h3>🖥️ Consola</h3>
-    <pre>{{ backendData | json }}</pre>
-  </section>
-
-  <section class="upload-section">
-    <h3>Importar archivo CSV</h3>
-    <input type="file" (change)="onFileSelected($event)" accept=".csv">
-    <button (click)="uploadCSV()" [disabled]="!selectedFile">Subir</button>
-  </section>
+    <section class="console-section" *ngIf="backendData">
+      <h3>🖥️ Consola</h3>
+      <pre>{{ backendData | json }}</pre>
+    </section>

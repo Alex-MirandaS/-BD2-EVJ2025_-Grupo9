@@ -7,100 +7,96 @@ import { Observable } from 'rxjs';
 export class DataService {
   protected apiUrl = 'http://localhost:3000/api/query/';
 
-  constructor(protected http: HttpClient) { 
+  constructor(protected http: HttpClient) {
   }
 
-  importCSV(selectedFile: File | null, backendData: any): void {
+  importCSV(selectedFile: File | null, database: number): any {
     if (!selectedFile) return;
+    console.log(database);
+    let url = 'http://localhost:3000/api/upload';
+    if (database === 1) {
+      url = 'http://localhost:3000/api/upload/neo4j';
+    }
+    console.log(url);
     const formData = new FormData();
     formData.append('file', selectedFile);
-
-    this.http.post('/', formData).subscribe({
-      next: res => {
-        alert('Archivo subido correctamente');
-        backendData = res;
-      },
-      error: err => {
-        alert('Error al subir el archivo');
-        backendData = err.error;
-      }
-    });
+    return this.http.post(url, formData);
   }
 
-  add(data:any): Observable<any> {
+  add(data: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, data);
   }
 
   aspiranteTipoInstitución(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'by-institution-type');
+    return this.http.get<any[]>(this.apiUrl + 'by-institution-type');
   }
 
   cantidadAprobadoMateria(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'passed-by-subject');
+    return this.http.get<any[]>(this.apiUrl + 'passed-by-subject');
   }
 
   aprobadosCarreraAnio(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'passed-by-career-and-year');
+    return this.http.get<any[]>(this.apiUrl + 'passed-by-career-and-year');
   }
 
   porcentajeAprobacionMateria(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'approval-rate-by-subject');
+    return this.http.get<any[]>(this.apiUrl + 'approval-rate-by-subject');
   }
 
   promedioEdadCarrera(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'');
+    return this.http.get<any[]>(this.apiUrl + 'average-age-by-career');
   }
 
   creacionColeccionAuxiliar(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'generate-career-summary');
+    return this.http.get<any[]>(this.apiUrl + 'generate-career-summary');
   }
 
   promedioEdadAprobadosCarreraInstitucion(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'average-age-by-career-and-institution');
+    return this.http.get<any[]>(this.apiUrl + 'average-age-by-career-and-institution');
   }
 
   distribucionAprobadosMunicipioCarrera(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'passed-by-municipality-and-career');
+    return this.http.get<any[]>(this.apiUrl + 'passed-by-municipality-and-career');
   }
 
   cantidadEvaluacionesMesMateriaPublica(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'evaluations-by-month-and-subject-public');
+    return this.http.get<any[]>(this.apiUrl + 'evaluations-by-month-and-subject-public');
   }
 
   topCarrerasDemandadasAspirantes(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'top-demanded-careers-age-16-18');
+    return this.http.get<any[]>(this.apiUrl + 'top-demanded-careers-age-16-18');
   }
-//CORRELATIVO ASPIRANTE
-  historialDesempenioAspirante(correlativo:String): Observable<any[]> {
-    return this.http.get<any>(`${this.apiUrl+'performance-history'}/${correlativo}`);
+  //CORRELATIVO ASPIRANTE
+  historialDesempenioAspirante(correlativo: String): Observable<any[]> {
+    return this.http.get<any>(`${this.apiUrl + 'performance-history'}/${correlativo}`);
   }
 
   distribucionSexoInstitucion(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'gender-distribution-by-institution-type');
+    return this.http.get<any[]>(this.apiUrl + 'gender-distribution-by-institution-type');
   }
 
   tasaAprobacionEdad(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'approval-rate-by-age');
+    return this.http.get<any[]>(this.apiUrl + 'approval-rate-by-age');
   }
 
   promedioIntentoMateria(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'average-attempts-by-subject');
+    return this.http.get<any[]>(this.apiUrl + 'average-attempts-by-subject');
   }
 
-//CORRELATIVO ASPIRANTE
-  historialAspirante(correlativo:String): Observable<any[]> {
-    return this.http.get<any>(`${this.apiUrl+'full-history'}/${correlativo}`);
+  //CORRELATIVO ASPIRANTE
+  historialAspirante(correlativo: String): Observable<any[]> {
+    return this.http.get<any>(`${this.apiUrl + 'full-history'}/${correlativo}`);
   }
   carrerasAspirantesReprobados(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'most-failed-careers-on-first-attempt');
+    return this.http.get<any[]>(this.apiUrl + 'most-failed-careers-on-first-attempt');
   }
 
   getCarreras(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'');
+    return this.http.get<any[]>(this.apiUrl + '');
   }
 
   getInstitucion(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl+'');
+    return this.http.get<any[]>(this.apiUrl + '');
   }
 
 }

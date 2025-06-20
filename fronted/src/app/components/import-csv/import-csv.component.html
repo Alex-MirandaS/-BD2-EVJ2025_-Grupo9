@@ -1,0 +1,17 @@
+<section class="upload-section">
+    <h3>Importar archivo CSV</h3>
+    <input type="file" (change)="onFileSelected($event)" accept=".csv">
+    <button (click)="uploadCSV()" [disabled]="!selectedFile">Subir</button>
+  </section>
+
+  <div class="toggle-section">
+    <label for="graficaSelect">Base de Datos a Importar: </label>
+    <select id="graficaSelect" class="styled-select" (change)="selectDataBase($event)">
+      <option *ngFor="let opcion of opcionesMostrar; let i = index" [value]="i">{{ opcion }}</option>
+    </select>
+  </div>
+
+  <section class="console-section" *ngIf="backendData">
+    <h3>🖥️ Consola</h3>
+    <pre>{{ backendData | json }}</pre>
+  </section>

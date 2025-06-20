@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
-import { HttpClient } from '@angular/common/http';
 import { DataService } from 'src/app/services/data.service';
 
 @Component({
@@ -9,14 +8,16 @@ import { DataService } from 'src/app/services/data.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  constructor(private http: HttpClient, private dataService: DataService) { }
-
+  constructor(private dataService: DataService) { }
+  correlativo_aspirante = '';
+  historial_aspirante = false;
   selectedFile: File | null = null;
   backendData: any = null;
   mostrarGraficas: boolean = true;
   mostrarGraficaBarras: boolean = false;
   mostrarGraficaPie: boolean = true;
-  mostrarTabla: boolean = true;
+  mostrarTabla: boolean = false;
+  mostrarInput: boolean = false;
   opcionSeleccionada: number = 0;
   columnas: string[] = [];
   tabla: any[] = [];
@@ -47,10 +48,10 @@ export class DashboardComponent {
   cargarGraficas(labels: any, values: any, graphType: number): void {
     switch (graphType) {
       case 1:
-        this.mostrarGraficaPie = false;  
+        this.mostrarGraficaPie = false;
         this.mostrarTabla = false;
         this.mostrarGraficaBarras = true;
-
+        this.mostrarInput = false;
         this.barData = {
           labels: [...labels],
           datasets: [
@@ -64,10 +65,10 @@ export class DashboardComponent {
 
         break;
       case 2:
-        this.mostrarGraficaPie = true;  
+        this.mostrarGraficaPie = true;
         this.mostrarTabla = false;
         this.mostrarGraficaBarras = false;
-
+        this.mostrarInput = false;
         this.pieData = {
           labels: [...labels],
           datasets: [
@@ -85,9 +86,10 @@ export class DashboardComponent {
         break;
 
       default:
-        this.mostrarGraficaPie = false;  
+        this.mostrarGraficaPie = false;
         this.mostrarTabla = true;
         this.mostrarGraficaBarras = false;
+        this.mostrarInput = false;
         this.backendData = labels;
         this.setColumnas(labels);
         break;
@@ -109,7 +111,7 @@ export class DashboardComponent {
           labels = data.map(d => d._id);
           values = data.map(d => d.total);
           this.backendData = data;
-          this.cargarGraficas(labels, values,2);
+          this.cargarGraficas(labels, values, 2);
         });
         break;
       case 1:
@@ -117,7 +119,7 @@ export class DashboardComponent {
           labels = data.map(d => d._id);
           values = data.map(d => d.total_passed);
           this.backendData = data;
-          this.cargarGraficas(labels, values,1);
+          this.cargarGraficas(labels, values, 1);
         });
         break;
       case 2:
@@ -125,7 +127,7 @@ export class DashboardComponent {
           labels = data.map(d => d.career);
           values = data.map(d => d.total_passed);
           this.backendData = data;
-          this.cargarGraficas(labels, values,2);
+          this.cargarGraficas(labels, values, 2);
         });
         break;
       case 3:
@@ -133,11 +135,16 @@ export class DashboardComponent {
           labels = data.map(d => d.subject);
           values = data.map(d => d.approval_rate);
           this.backendData = data;
-          this.cargarGraficas(labels, values,1);
+          this.cargarGraficas(labels, values, 1);
         });
         break;
       case 4:
-        //PENDIENTE
+        this.dataService.promedioEdadCarrera().subscribe(data => {
+          labels = data.map(d => d.career);
+          values = data.map(d => d.average_age);
+          this.backendData = data;
+          this.cargarGraficas(labels, values, 2);
+        });
         break;
       case 5:
         this.dataService.creacionColeccionAuxiliar().subscribe(data => {
@@ -164,7 +171,7 @@ export class DashboardComponent {
           labels = data.map(d => d.career);
           values = data.map(d => d.total_applicants);
           this.backendData = data;
-          this.cargarGraficas(labels, values,2);
+          this.cargarGraficas(labels, values, 2);
         });
         break;
       case 10:/*PENDIENTE 5901b2d532957c695af8   TABLA DE TABLAS
@@ -173,9 +180,14 @@ export class DashboardComponent {
               values = data.map(d => d.total_applicants);
               this.cargarGraficas(labels, values);
             });*/
-        this.dataService.historialDesempenioAspirante('5901b2d532957c695af8').subscribe(data => {
-          this.cargarGraficas(data, null, 7);
-        });
+
+            this.mostrarGraficaPie = false;
+            this.mostrarTabla = false;
+            this.mostrarGraficaBarras = false;
+            this.mostrarInput = true;
+            this.historial_aspirante = false;
+            this.backendData = '';
+            this.correlativo_aspirante = ''; 
         break;
       case 11:
         this.dataService.distribucionSexoInstitucion().subscribe(data => {
@@ -187,7 +199,7 @@ export class DashboardComponent {
           labels = data.map(d => d.age);
           values = data.map(d => d.approval_rate);
           this.backendData = data;
-          this.cargarGraficas(labels, values,1);
+          this.cargarGraficas(labels, values, 1);
         });
         break;
       case 13:
@@ -195,21 +207,24 @@ export class DashboardComponent {
           labels = data.map(d => d.subject);
           values = data.map(d => d.average_attempts);
           this.backendData = data;
-          this.cargarGraficas(labels, values,1);
+          this.cargarGraficas(labels, values, 1);
         });
         break;
-      case 14:/*PENDIENTE 5901b2d532957c695af8   Agregar como obtener ID
-*/
-        this.dataService.historialAspirante('5901b2d532957c695af8').subscribe(data => {
-          this.cargarGraficas(data, null, 7);
-        });
+      case 14:
+        this.mostrarGraficaPie = false;
+        this.mostrarTabla = false;
+        this.mostrarGraficaBarras = false;
+        this.mostrarInput = true;
+        this.historial_aspirante = true;
+        this.backendData = '';
+        this.correlativo_aspirante = ''; 
         break;
       case 15:
         this.dataService.carrerasAspirantesReprobados().subscribe(data => {
           labels = data.map(d => d.career);
           values = data.map(d => d.total_failed);
           this.backendData = data;
-          this.cargarGraficas(labels, values,2);
+          this.cargarGraficas(labels, values, 2);
         });
         break;
     }
@@ -255,11 +270,22 @@ export class DashboardComponent {
     this.tabla = data;
   }
 
-  onFileSelected(event: any): void {
-    this.selectedFile = event.target.files[0];
+  buscar() {// filtrar historial aspirante
+    if (this.correlativo_aspirante === '') alert('Por favor, ingrese el Correlativo del Estudiante para Avanzar');
+    if (this.historial_aspirante) {
+      this.dataService.historialAspirante(this.correlativo_aspirante).subscribe(data => {
+        this.mostrarTabla = true;
+        this.backendData = data;
+        this.setColumnas(data);
+      });
+    }else{
+      this.dataService.historialDesempenioAspirante(this.correlativo_aspirante).subscribe(data => {
+        this.mostrarTabla = true;
+        this.backendData = data;
+        this.setColumnas(data);
+      });
+    }
+
   }
 
-  uploadCSV(): void {
-    this.dataService.importCSV(this.selectedFile, this.backendData);
-  }
 }
