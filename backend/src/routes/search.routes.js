@@ -4,6 +4,7 @@ const express = require("express");
 const router = express.Router();
 const Applicant = require("../models/Applicant");
 const { getNeo4jSession } = require("../config/dbNeo4j");
+const neo4j = require('neo4j-driver')
 
 router.get("/", async (req, res) => {
 	const {
@@ -57,13 +58,18 @@ router.get("/", async (req, res) => {
 
 router.get("/neo4j/graph", async (req, res) => {
 	const session = getNeo4jSession();
+	const limit = Math.floor(Number(req.query.limit)) || 10000;
 
 	try {
-		const result = await session.run(`
-      MATCH (a:Applicant)-[r1:AIMS_FOR]->(c:Career)
-      OPTIONAL MATCH (a)-[r2:STUDIED_AT]->(i:Institution)
-      RETURN a, c, i
-    `);
+		const result = await session.run(
+			`
+                MATCH (a:Applicant)-[r1:AIMS_FOR]->(c:Career)
+                OPTIONAL MATCH (a)-[r2:STUDIED_AT]->(i:Institution)
+                RETURN a, c, i
+                LIMIT $limit
+            `,
+			{ limit: neo4j.int(limit) }
+		);
 
 		const nodesMap = new Map();
 		const edges = [];
