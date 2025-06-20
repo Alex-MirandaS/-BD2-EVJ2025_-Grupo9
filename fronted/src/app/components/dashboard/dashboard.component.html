@@ -1,0 +1,54 @@
+<div class="dashboard">
+  <h1>Dashboard Gráfico</h1>
+
+  <div class="toggle-section">
+    <label for="graficaSelect">Consultas</label>
+    <select id="graficaSelect" class="styled-select" (change)="selectConsulta($event)">
+      <option *ngFor="let opcion of opcionesMostrar; let i = index" [value]="i">{{ opcion }}</option>
+    </select>
+  </div>
+
+  <section class="charts-section" *ngIf="mostrarGraficas">
+
+    <section class="bar-chart" *ngIf="mostrarGraficaBarras">
+      <div class="charts">
+        <div class="chart-card">
+          <canvas baseChart [data]="barData" [options]="barOptions" [type]="'bar'"></canvas>
+        </div>
+      </div>
+    </section>
+    <section class="bar-chart" *ngIf="mostrarGraficaPie">
+      <div class="charts">
+        <div class="chart-card">
+          <canvas baseChart [data]="pieData" [options]="pieOptions" [type]="'pie'"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <section *ngIf="mostrarTabla" class="table-container">
+      <div class="table-responsive">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th *ngFor="let col of columnas">{{ col | titlecase }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of tabla">
+              <td *ngFor="let col of columnas">{{ row[col] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  <section class="console-section" *ngIf="backendData">
+    <h3>🖥️ Consola</h3>
+    <pre>{{ backendData | json }}</pre>
+  </section>
+
+  <section class="upload-section">
+    <h3>Importar archivo CSV</h3>
+    <input type="file" (change)="onFileSelected($event)" accept=".csv">
+    <button (click)="uploadCSV()" [disabled]="!selectedFile">Subir</button>
+  </section>

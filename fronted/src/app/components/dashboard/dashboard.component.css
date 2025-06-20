@@ -1,0 +1,131 @@
+.dashboard {
+  padding: 2rem;
+  text-align: center;
+}
+
+.toggle-section {
+  margin: 1rem 0;
+}
+
+.toggle-section select.styled-select {
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  margin-left: 0.5rem;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.toggle-section select.styled-select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.charts-section {
+  margin-bottom: 3rem;
+}
+
+.charts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.chart-card {
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 350px;
+  height: 350px;
+}
+
+.upload-section {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+  max-width: 400px;
+  margin: 2rem auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.upload-section input[type="file"] {
+  margin: 0.5rem 0;
+}
+
+.upload-section button {
+  background-color: #28a745;
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.upload-section button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.console-section {
+  text-align: left;
+  background: #1e1e1e;
+  color: #dcdcdc;
+  padding: 1rem;
+  margin: 2rem auto;
+  max-width: 700px;
+  border-radius: 12px;
+  font-family: monospace;
+  font-size: 0.9rem;
+  white-space: pre-wrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; /* smooth scrolling en iOS */
+}
+
+.styled-table {
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-width: 300px;
+  width: 100%;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.styled-table thead tr {
+  background-color: #343a40;
+  color: #ffffff;
+  text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+
+.styled-table tbody tr:nth-child(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:hover {
+  background-color: #d0e4f5;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .styled-table {
+    font-size: 0.9rem;
+  }
+  .styled-table th, .styled-table td {
+    padding: 8px 10px;
+  }
+}
