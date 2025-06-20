@@ -65,34 +65,6 @@ router.get("/passed-by-career-and-year", async (req, res) => {
 	}
 });
 
-router.get("/passed-by-career-and-year", async (req, res) => {
-	try {
-		const data = await Applicant.aggregate([
-			{ $match: { passed: true } },
-			{
-				$group: {
-					_id: {
-						career: "$target_career",
-						year: "$admission_year",
-					},
-					total_passed: { $sum: 1 },
-				},
-			},
-			{
-				$project: {
-					career: "$_id.career",
-					year: "$_id.year",
-					total_passed: 1,
-					_id: 0,
-				},
-			},
-		]);
-		res.json(data);
-	} catch (err) {
-		res.status(500).json({ error: err.message });
-	}
-});
-
 router.get("/approval-rate-by-subject", async (req, res) => {
 	try {
 		const data = await Applicant.aggregate([
