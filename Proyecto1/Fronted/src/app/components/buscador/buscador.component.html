@@ -1,0 +1,17 @@
+<div class="search-container">
+    <h1>🔍 Buscador Avanzado</h1>
+    <form (ngSubmit)="buscar()">
+      <input type="text" [(ngModel)]="id" name="id" placeholder="ID del Aspirante">
+      <input type="text" [(ngModel)]="carrera" name="carrera" placeholder="Carrera Objetivo">
+      <input type="text" [(ngModel)]="institucion" name="institucion" placeholder="Institución Educativa">
+      <button type="submit">Buscar</button>
+    </form>
+  
+    <div *ngIf="resultados.length">
+      <h3>Resultados:</h3>
+      <ul>
+        <li *ngFor="let r of resultados">{{ r }}</li>
+      </ul>
+    </div>
+  </div>
+  
