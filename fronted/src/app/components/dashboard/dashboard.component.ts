@@ -174,13 +174,7 @@ export class DashboardComponent {
           this.cargarGraficas(labels, values, 2);
         });
         break;
-      case 10:/*PENDIENTE 5901b2d532957c695af8   TABLA DE TABLAS
-            this.dataService.historialDesempenioAspirante().subscribe(data => {
-              labels = data.map(d => d.career);
-              values = data.map(d => d.total_applicants);
-              this.cargarGraficas(labels, values);
-            });*/
-
+      case 10:
             this.mostrarGraficaPie = false;
             this.mostrarTabla = false;
             this.mostrarGraficaBarras = false;
@@ -270,7 +264,7 @@ export class DashboardComponent {
     this.tabla = data;
   }
 
-  buscar() {// filtrar historial aspirante
+  buscar() {
     if (this.correlativo_aspirante === '') alert('Por favor, ingrese el Correlativo del Estudiante para Avanzar');
     if (this.historial_aspirante) {
       this.dataService.historialAspirante(this.correlativo_aspirante).subscribe(data => {
@@ -285,7 +279,6 @@ export class DashboardComponent {
         this.setColumnas(data);
       });
     }
-
   }
 
 }

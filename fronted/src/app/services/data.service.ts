@@ -88,15 +88,19 @@ export class DataService {
   }
 
   getCarreras(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + '');
+    return this.http.get<any[]>('http://localhost:3000/api/search/careers');
   }
 
   getInstitucion(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl + '');
+    return this.http.get<any[]>('http://localhost:3000/api/search/institutions');
   }
 
   grafos(limit: number): Observable<any> {
     return this.http.get<any>(`http://localhost:3000/api/search/neo4j/graph?limit=${limit}`);
+  }
+
+  buscadorAvanzado(params: any): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:3000/api/search', { params });
   }
   
 }

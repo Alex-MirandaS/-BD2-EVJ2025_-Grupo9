@@ -1,17 +1,64 @@
 <div class="search-container">
-    <h1>🔍 Buscador Avanzado</h1>
+    <h1>Buscador Avanzado</h1>
     <form (ngSubmit)="buscar()">
-      <input type="text" [(ngModel)]="id" name="id" placeholder="ID del Aspirante">
-      <input type="text" [(ngModel)]="carrera" name="carrera" placeholder="Carrera Objetivo">
-      <input type="text" [(ngModel)]="institucion" name="institucion" placeholder="Institución Educativa">
+      <input type="text" [(ngModel)]="id" name="id" placeholder="Correlativo del Aspirante">
+      <input type="text" [(ngModel)]="materia" name="materia" placeholder="Materia">
+      <input type="text" [(ngModel)]="departamento" name="departamento" placeholder="Departamento">
+      <input type="text" [(ngModel)]="municipio" name="municipio" placeholder="Municipio">
+      <input type="text" [(ngModel)]="genero" name="genero" placeholder="Género">
+      <input type="number" [(ngModel)]="birth_year" name="birth_year" placeholder="Año de Nacimiento">
+      <input type="number" [(ngModel)]="admission_year" name="admission_year" placeholder="Año de Admision">
+      <input type="number" [(ngModel)]="evaluation_number" name="evaluation_number" placeholder="Número de Evaluación">
+      <select id="aprobado" [(ngModel)]="aprobado" name="aprobado" placeholder="Aprobado">
+        <option value="null">Estado de Aprobación</option>
+        <option value="true">Aprobado</option>
+        <option value="false">Reprobado</option>
+      </select>
+
+      <select id="carrera" [(ngModel)]="carrera" name="carrera">
+        <option value="null">Carrera Objetivo</option>
+        <option *ngFor="let opcion of carreras; let i = index" [value]="i">{{ opcion }}</option>
+      </select>
+      <select id="institucion" [(ngModel)]="institucion" name="institucion">
+        <option value="null">Institución Educativa</option>
+        <option *ngFor="let opcion of instituciones; let i = index" [value]="i">{{ opcion }}</option>
+      </select>
       <button type="submit">Buscar</button>
-    </form>
-  
-    <div *ngIf="resultados.length">
-      <h3>Resultados:</h3>
-      <ul>
-        <li *ngFor="let r of resultados">{{ r }}</li>
-      </ul>
-    </div>
+    </form>   
   </div>
+
+  <section *ngIf="mostrarTabla" class="table-container">
+    <div class="table-responsive">
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th *ngFor="let col of columnas">{{ col | titlecase }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of tabla">
+            <td *ngFor="let col of columnas">
+              <ng-container *ngIf="col === 'results'; else normalCell">
+                <ul>
+                  <li *ngFor="let r of row[col]">
+                    Fecha: {{ r.date | date:'yyyy-MM-dd' }} -
+                    Evaluación: {{ r.eval_number }} -
+                    Resultado: {{ r.passed ? 'Aprobado' : 'Reprobado' }}
+                  </li>
+                </ul>
+              </ng-container>
+              <ng-template #normalCell>
+                {{ row[col] }}
+              </ng-template>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="console-section" *ngIf="backendData">
+    <h3>🖥️ Consola</h3>
+    <pre>{{ backendData | json }}</pre>
+  </section>
   
