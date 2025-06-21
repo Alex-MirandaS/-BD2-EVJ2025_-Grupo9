@@ -1,0 +1,618 @@
+{
+	"info": {
+		"_postman_id": "e3249136-e2bc-4679-b6f7-9e7b4c9416a7",
+		"name": "BD2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44669060",
+		"_collection_link": "https://marcosaguare.postman.co/workspace/3fc0cf49-7210-49f1-8054-9e577de843a2/collection/44669060-e3249136-e2bc-4679-b6f7-9e7b4c9416a7?action=share&source=collection_link&creator=44669060"
+	},
+	"item": [
+		{
+			"name": "Carga de Archivo Mongo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/aguare/Downloads/pruebas_especificas_2023.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Carga de Archivo Neo4j",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/aguare/Downloads/pruebas_especificas_2023_neo.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/upload/neo4j",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"upload",
+						"neo4j"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Data Neo4j",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/aguare/Downloads/pruebas_especificas_2023.csv"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/upload/neo4j/clear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"upload",
+						"neo4j",
+						"clear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Busqueda Avanzada",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/search?code=cf24eeb747da491e97c0&career=example&institution=example",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "cf24eeb747da491e97c0"
+						},
+						{
+							"key": "career",
+							"value": "example"
+						},
+						{
+							"key": "institution",
+							"value": "example"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Carreras",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/search/careers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"search",
+						"careers"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "career",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "institution",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Instituciones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/search/institutions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"search",
+						"institutions"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "career",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "institution",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lista Codigos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/search/codes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"search",
+						"codes"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "career",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "institution",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Grafo Neo4j",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/search/neo4j/graph?limit=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"search",
+						"neo4j",
+						"graph"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Por Institucion",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/by-institution-type",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"by-institution-type"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cantidad de aprobados por materia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/passed-by-subject",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"passed-by-subject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Aprobados por carrera y anio",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/passed-by-career-and-year",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"passed-by-career-and-year"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Porcentaje de aprobacion por materia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/approval-rate-by-subject",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"approval-rate-by-subject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Promedio de edad por carrera",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/average-age-by-career",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"average-age-by-career"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear colección auxiliar",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/generate-career-summary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"generate-career-summary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Promedio de edad de los aspirantes que aprobaron, agrupado por carrera y tipo de institución",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/average-age-by-career-and-institution",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"average-age-by-career-and-institution"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Distribución de aprobados por municipio y carrera",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/passed-by-municipality-and-career",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"passed-by-municipality-and-career"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cantidad de evaluaciones por mes y materia, solo para instituciones públicas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/evaluations-by-month-and-subject-public",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"evaluations-by-month-and-subject-public"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Top 5 carreras más demandadas por aspirantes entre 16 y 18 años",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/top-demanded-careers-age-16-18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"top-demanded-careers-age-16-18"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Historial de desempeño por aspirante con desglose de intentos por materia y resultados",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/performance-history/5901b2d532957c695af8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"performance-history",
+						"5901b2d532957c695af8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Distribución por sexo y tipo de institución",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/gender-distribution-by-institution-type",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"gender-distribution-by-institution-type"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Tasa de aprobación por edad",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/approval-rate-by-age",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"approval-rate-by-age"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Número promedio de intentos por materia",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/average-attempts-by-subject",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"average-attempts-by-subject"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Historial completo de un aspirante",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/full-history/5901b2d532957c695af8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"full-history",
+						"5901b2d532957c695af8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Carreras con más aspirantes reprobados en primer intento",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/query/most-failed-careers-on-first-attempt",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"query",
+						"most-failed-careers-on-first-attempt"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
