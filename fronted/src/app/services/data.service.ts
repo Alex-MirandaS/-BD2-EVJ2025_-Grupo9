@@ -23,10 +23,6 @@ export class DataService {
     return this.http.post(url, formData);
   }
 
-  add(data: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, data);
-  }
-
   aspiranteTipoInstitución(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + 'by-institution-type');
   }
@@ -99,4 +95,8 @@ export class DataService {
     return this.http.get<any[]>(this.apiUrl + '');
   }
 
+  grafos(limit: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:3000/api/search/neo4j/graph?limit=${limit}`);
+  }
+  
 }

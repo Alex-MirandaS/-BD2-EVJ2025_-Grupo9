@@ -2,3 +2,11 @@
     <h1>🕸️ Explorador de Grafos</h1>
     <div id="graph" class="graph"></div>
   </div>
+
+  <div class="toggle-section">   
+    <form class="form-horizontal" (ngSubmit)="buscar()">
+      <label for="graficaSelect"> Limite de Nodos </label>
+      <input type="number" [(ngModel)]="limite" name="id" placeholder="Límite de Registros">
+      <button type="submit">Buscar</button>
+    </form>
+  </div>
