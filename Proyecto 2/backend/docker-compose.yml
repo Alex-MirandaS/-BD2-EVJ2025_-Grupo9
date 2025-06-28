@@ -1,0 +1,40 @@
+services:
+  backend:
+    build: .
+    ports:
+      - '${PORT}:${PORT}'
+    depends_on:
+      - redis-exporter
+    environment:
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - PORT=${PORT}
+      - MONGO_URI=${MONGO_URI}
+      - NEO4J_URI=${NEO4J_URI}
+      - NEO4J_USER=${NEO4J_USER}
+      - NEO4J_PASSWORD=${NEO4J_PASSWORD}
+
+  redis-exporter:
+    image: oliver006/redis_exporter
+    ports:
+      - '9121:9121'
+    environment:
+      - REDIS_ADDR=redis://default:${REDIS_PASSWORD}@${REDIS_HOST}:${REDIS_PORT}
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - '3001:3000'
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+volumes:
+  grafana-data:
