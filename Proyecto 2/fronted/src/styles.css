@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  background-color: #1b1b1b;
+  color: #fff;
+}
+
+.navbar {
+  background-color: #2d2d2d;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #00ff99;
+  font-weight: bold;
+}
+
+.home, .admin, .user, .login, .register {
+  padding: 20px;
+  text-align: center;
+}
+
+button {
+  background-color: #00ff99;
+  color: black;
+  border: none;
+  padding: 10px;
+  font-family: 'Press Start 2P', cursive;
+  margin: 5px;
+  cursor: pointer;
+}
+
+input {
+  padding: 8px;
+  margin-bottom: 40px;
+  width: 30%;
+  font-family: 'Press Start 2P', cursive;
+  border: 1px solid #00ff99;
+  background-color: #2d2d2d;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .navbar ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

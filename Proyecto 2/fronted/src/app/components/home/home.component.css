@@ -1,0 +1,88 @@
+.home {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .game-card {
+    background-color: #2d2d2d;
+    margin: 20px auto;
+    padding: 15px;
+    border: 3px solid #00ff99;
+    max-width: 600px;
+    border-radius: 0;
+    text-align: left;
+    font-family: 'Press Start 2P', cursive;
+  }
+  
+  .game-image {
+    width: 100%;
+    border: 2px solid #00ff99;
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .game-info p {
+    margin: 4px 0;
+    font-size: 10px;
+  }
+  
+  .reviews {
+    margin-top: 10px;
+    background-color: #1b1b1b;
+    padding: 10px;
+    border-top: 1px solid #00ff99;
+  }
+  
+  .reviews-title {
+    font-size: 10px;
+    color: #00ff99;
+  }
+  
+  .review p {
+    font-size: 9px;
+    margin: 5px 0;
+    border-bottom: 1px dashed #00ff99;
+    padding-bottom: 5px;
+  }
+  
+  .add-review {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-top: 10px;
+  }
+  
+  .add-review input {
+    background-color: #2d2d2d;
+    border: 2px solid #00ff99;
+    color: white;
+    padding: 8px;
+    font-family: 'Press Start 2P', cursive;
+    margin-bottom: 5px;
+    font-size: 10px;
+    width: 95%;
+  }
+  
+  .add-review button {
+    background-color: #00ff99;
+    border: none;
+    padding: 10px;
+    font-family: 'Press Start 2P', cursive;
+    cursor: pointer;
+    font-size: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .game-card {
+      margin: 10px;
+      padding: 10px;
+    }
+  
+    .game-info p,
+    .reviews-title,
+    .review p,
+    .add-review input,
+    .add-review button {
+      font-size: 8px;
+    }
+  }

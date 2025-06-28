@@ -1,0 +1,24 @@
+<app-navbar-home></app-navbar-home>
+<div class="home">
+  <h1>Bienvenido a GamerZone</h1>
+  <p>Explora las reseñas más recientes</p>
+  <div class="game-card" *ngFor="let game of games">
+    <img [src]="game.image" alt="game image" class="game-image">
+    <div class="game-info">
+      <h2>{{ game.title }}</h2>
+      <p><strong>Género:</strong> {{ game.genre }}</p>
+      <p><strong>Desarrollador:</strong> {{ game.developer }}</p>
+      <p><strong>Descripción:</strong> {{ game.description }}</p>
+    </div>
+    <div class="reviews">
+      <p class="reviews-title">🗨️ Reseñas</p>
+      <div class="review" *ngFor="let review of game.reviews">
+        <p><strong>{{ review.username }}:</strong> {{ review.comment }}</p>
+      </div>
+      <div class="add-review">
+        <input [(ngModel)]="game.newReview" placeholder="Escribe tu reseña..." />
+        <button (click)="addReview(game)">Publicar</button>
+      </div>
+    </div>
+  </div>
+</div>

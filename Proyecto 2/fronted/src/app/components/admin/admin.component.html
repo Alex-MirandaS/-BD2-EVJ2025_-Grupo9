@@ -1,0 +1,30 @@
+<app-navbar-admin></app-navbar-admin>
+<div class="admin">
+    <h2>Panel de Administrador</h2>
+    <button>Añadir Videojuego</button>
+    <button>Gestionar Usuarios</button>
+    <button>Añadir Usuario</button>
+  </div>
+
+  <div class="user-list">
+    <h3>Usuarios Registrados</h3>
+    <div class="user-item" *ngFor="let user of users">
+      <p><strong>Usuario:</strong> {{ user.username }}</p>
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <button>Eliminar</button>
+    </div>
+  </div>
+
+  <div class="register">
+    <h2>Añadir Usuario</h2>
+    <form>
+        <br /><br />
+      <label for="username">Usuario:</label><br /><br />
+      <input type="text" id="username" name="username"><br />
+      <label for="email">Correo:</label><br /><br />
+      <input type="email" id="email" name="email"><br />
+      <label for="password">Contraseña:</label><br /><br />
+      <input type="password" id="password" name="password"><br />
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
