@@ -1,6 +1,25 @@
-node_modules/
+# === General ===
+**/.DS_Store
+**/Thumbs.db
+
+# === Node.js (cualquier carpeta)
 **/node_modules/
-.env
-*.env
-.angular
-*.angular
+**/package-lock.json
+**/.env
+**/coverage/
+**/logs/
+**/*.log
+**/*.pid
+**/pids/
+
+# === Angular (cualquier carpeta)
+**/dist/
+**/.angular/
+**/.env.*
+**/.cache/
+
+# === IDEs and system ===
+**/.idea/
+**/.vscode/
+**/*.sublime-project
+**/*.sublime-workspace
