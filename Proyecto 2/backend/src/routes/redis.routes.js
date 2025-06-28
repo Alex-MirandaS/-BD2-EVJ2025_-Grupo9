@@ -247,26 +247,67 @@ router.get("/reviews/game/:id", async (req, res) => {
 	}
 });
 
-router.get('/games', async (req, res) => {
-  try {
-    const keys = await redis.keys('game:*');
-    const games = [];
+router.get("/games", async (req, res) => {
+	try {
+		const keys = await redis.keys("game:*");
+		const games = [];
 
-    for (const key of keys) {
-      const keyType = await redis.type(key);
-      if (keyType !== 'hash') continue;
+		for (const key of keys) {
+			const keyType = await redis.type(key);
+			if (keyType !== "hash") continue;
 
-      const game = await redis.hGetAll(key);
-      const game_id = key.split(':')[1];
-      games.push({ game_id, ...game });
-    }
+			const game = await redis.hGetAll(key);
+			const game_id = key.split(":")[1];
+			games.push({ game_id, ...game });
+		}
 
-    res.status(200).json(games);
-  } catch (err) {
-    console.error('Error al obtener juegos:', err);
-    res.status(500).json({ error: 'Error interno del servidor' });
-  }
+		res.status(200).json(games);
+	} catch (err) {
+		console.error("Error al obtener juegos:", err);
+		res.status(500).json({ error: "Error interno del servidor" });
+	}
 });
 
+router.get("/users", async (req, res) => {
+	try {
+		const keys = await redis.keys("user:*");
+		const users = [];
+
+		for (const key of keys) {
+			const keyType = await redis.type(key);
+			if (keyType !== "hash") continue;
+
+			const user = await redis.hGetAll(key);
+			const user_id = key.split(":")[1];
+			users.push({ user_id, ...user });
+		}
+
+		res.status(200).json(users);
+	} catch (err) {
+		console.error("Error al obtener usuarios:", err);
+		res.status(500).json({ error: "Error interno del servidor" });
+	}
+});
+
+router.get("/reviews", async (req, res) => {
+	try {
+		const keys = await redis.keys("review:*");
+		const reviews = [];
+
+		for (const key of keys) {
+			const keyType = await redis.type(key);
+			if (keyType !== "hash") continue;
+
+			const review = await redis.hGetAll(key);
+			const review_id = key.split(":")[1];
+			reviews.push({ review_id, ...review });
+		}
+
+		res.status(200).json(reviews);
+	} catch (err) {
+		console.error("Error al obtener reseñas:", err);
+		res.status(500).json({ error: "Error interno del servidor" });
+	}
+});
 
 module.exports = router;
