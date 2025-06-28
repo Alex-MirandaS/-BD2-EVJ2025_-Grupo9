@@ -1,0 +1,43 @@
+.admin {
+    padding: 20px;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+  }
+  
+  button {
+    background-color: #00ff99;
+    color: black;
+    border: none;
+    padding: 10px;
+    font-family: 'Press Start 2P', cursive;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  .user-list {
+    margin-top: 30px;
+    background-color: #2d2d2d;
+    padding: 20px;
+    border: 3px solid #00ff99;
+    text-align: left;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .user-item {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #00ff99;
+    font-size: 10px;
+  }
+  
+  .user-item p {
+    margin: 5px 0;
+  }
+  
+  @media (max-width: 768px) {
+    .user-item {
+      font-size: 8px;
+    }
+  }
